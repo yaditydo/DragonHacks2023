@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure ServaChat</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<form method="post" class="buttons">
+  <h3>Enter The Chat Room</h3>
+  <div>
+    <label>Name:</label>
+    <input
+      type="text"
+      placeholder="Pick a name!"
+      name="name"
+      value="{{name}}"
+    />
+  </div>
+  <div class="join">
+    <input type="text" placeholder="Room Code" name="code" value="{{code}}" />
+    <button type="submit" name="join">Join a Room</button>
+  </div>
+  <button type="submit" name="create" class="create-btn">Create a Room</button>
+  {% if error %}
+  <ul>
+    <li>{{error}}</li>
+  </ul>
+  {% endif %}
+</form>
+{% endblock %}
