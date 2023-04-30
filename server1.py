@@ -6,6 +6,7 @@ from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Protocol.KDF import scrypt
 import sys
+import ssl
 def server_commands(server):
     while True:
         cmd = input("Enter a command (start, stop, exit): ")

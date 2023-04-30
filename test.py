@@ -16,11 +16,6 @@ class GUI:
 
         self.initialize_gui()
 
-    #def initialize_socket(self):
-        #self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # initialazing socket with TCP and IPv4
-        #remote_ip = '127.0.0.1' # IP address 
-        ##self.client_socket.connect((remote_ip, remote_port)) #connect to the remote server
-
     def initialize_gui(self): # GUI initializer
         self.root.title("Socket Chat") 
         self.root.resizable(0, 0)
@@ -29,21 +24,6 @@ class GUI:
         self.display_chat_entry_box()
     
     
-    def receive_message_from_server(self, so):
-        while True:
-            buffer = so.recv(256)
-            if not buffer:
-                break
-            message = buffer.decode('utf-8')
-         
-            if "joined" in message:
-                user = message.split(":")[1]
-                message = user + " has joined"
-                self.chat_transcript_area.insert('end', message + '\n')
-                self.chat_transcript_area.yview(END)
-            else:
-                self.chat_transcript_area.insert('end', message + '\n')
-                self.chat_transcript_area.yview(END)
 
         so.close()
 
