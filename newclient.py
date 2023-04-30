@@ -19,7 +19,7 @@ def init_db():
                       (id INTEGER PRIMARY KEY AUTOINCREMENT,
                        name TEXT UNIQUE NOT NULL,
                        phone INTEGER UNIQUE NOT NULL,
-                       email TEXT UNIQUE,
+                       email TEXT NOT NULL UNIQUE,
                        password TEXT UNIQUE NOT NULL,
                        private_key TEXT,
                        public_key TEXT)''')
@@ -27,7 +27,7 @@ def init_db():
                       (id INTEGER PRIMARY KEY AUTOINCREMENT,
                        user_email TEXT,
                        name TEXT,
-                       email TEXT UNIQUE,
+                       email TEXT,
                        FOREIGN KEY (user_email) REFERENCES users (email))''')
     conn.commit()
     conn.close()

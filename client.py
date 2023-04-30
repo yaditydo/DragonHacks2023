@@ -250,7 +250,11 @@ def on_close(self):
 if __name__ == '__main__':
     login_window = tk.Tk()
     login_window.title("Login ~ Simple SecureChat")
-    login_window.geometry("400, 400")
+    login_window.geometry("400x400")
+    bg_image_path = "img/bgtg.png"  # Provide the path to the background image
+    bg_image = tk.PhotoImage(file=bg_image_path)
+    bg_label = tk.Label(login_window, image=bg_image)
+    bg_label.place(x=0, y=0, relwidth=1, relheight=1)
     email_label = tk.Label(login_window, text="Email:")
     email_label.grid(row=0, column=0, padx=5, pady=5)
     email_entry = tk.Entry(login_window)
@@ -262,11 +266,82 @@ if __name__ == '__main__':
     password_entry.grid(row=1, column=1, padx=5, pady=5)
 
     login_button = tk.Button(login_window, text="Login", command=login)
-    login_button.grid(row=2, column=1, padx=5, pady=5)
-           
+    login_button.grid(row=2, column=1, padx=6, pady=5)
 
-            
-           
+  
+    
+    
+  
+    def Sign_up():
+        signup_window = tk.Toplevel()
+        signup_window.title("Sign Up")
+        signup_window.geometry("400x400")
+        name_label = tk.Label(signup_window, text="Name:")
+        name_label.grid(row=0, column=0, padx=5, pady=5)
+        name_entry = tk.Entry(signup_window)
+        name_entry.grid(row=0, column=1, padx=5, pady=5)
+
+        email_label = tk.Label(signup_window, text="Email:")
+        email_label.grid(row=1, column=0, padx=5, pady=5)
+        email_entry = tk.Entry(signup_window)
+        email_entry.grid(row=1, column=1, padx=5, pady=5)
+
+        phone_label = tk.Label(signup_window, text="Phone:")
+        phone_label.grid(row=2, column=0, padx=5, pady=5)
+        phone_entry = tk.Entry(signup_window)
+        phone_entry.grid(row=2, column=1, padx=5, pady=5)
+
+        password_label = tk.Label(signup_window, text="Password:")
+        password_label.grid(row=3, column=0, padx=5, pady=5)
+        password_entry = tk.Entry(signup_window, show="*")
+        password_entry.grid(row=3, column=1, padx=5, pady=5)
+        register_button = tk.Button(signup_window, text="Register", command=lambda: create_user(
+            name_entry.get(),
+            email_entry.get(),
+            phone_entry.get(),
+            password_entry.get(),
+            signup_window
+        ))
+        register_button.grid(row=4, column=1, padx=5, pady=5)
+
+    def create_user(name, email, phone, password, signup_window):
+        if not (name and email and phone and password):
+            messagebox.showerror("Error", "All fields are required")
+            return
+
+        try:
+            phone = int(phone)
+        except ValueError:
+            messagebox.showerror("Error", "Invalid phone number")
+            return
+
+        conn = sqlite3.connect(DB_NAME)
+        cursor = conn.cursor()
+
+        salt = get_random_bytes(16)
+        hashed_password = hash_password(password, salt)
+        stored_password = salt + hashed_password
+
+        try:
+            cursor.execute("INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)",
+                        (name, email, phone, stored_password))
+        except sqlite3.IntegrityError as e:
+            if 'UNIQUE constraint' in str(e):
+                messagebox.showerror("Error", "Email or phone number already exists")
+            else:
+                messagebox.showerror("Error", "An error occurred while creating your account")
+            conn.close()
+            return
+
+        conn.commit()
+        conn.close()
+        messagebox.showinfo("Success", "Account created successfully!")
+        signup_window.destroy()
+    
+    signup_button = tk.Button(login_window, text="Sign Up", command=Sign_up)
+    signup_button.grid(row=3, column=1, padx=5, pady=5)
+    login_window.mainloop()
+        
 
 
 
