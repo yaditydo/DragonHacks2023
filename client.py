@@ -245,10 +245,12 @@ def on_close(self):
     if response:
         self.client.sock.close()
         self.destroy()
+        self.protocol("WM_DELETE_WINDOW", self.on_close)
         
 if __name__ == '__main__':
     login_window = tk.Tk()
     login_window.title("Login ~ Simple SecureChat")
+    login_window.geometry("400, 400")
     email_label = tk.Label(login_window, text="Email:")
     email_label.grid(row=0, column=0, padx=5, pady=5)
     email_entry = tk.Entry(login_window)

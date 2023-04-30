@@ -9,6 +9,18 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
 
+"""Initial plan was a flask framework. Ignore this file, I'm just leaving it for later use."""
+
+
+
+
+
+
+
+
+
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
