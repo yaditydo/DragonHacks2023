@@ -1,12 +1,15 @@
 # Simple SecureChat /~~~\ Program Documentation
 ## Overview
-### This encrypted chat program provides end-to-end encrypted communication between users through a server. The application is built using Python and the Tkinter library for the graphical user interface. It uses a combination of asymmetric and symmetric encryption for secure communication. The program also provides user authentication and contact management features to user profiles.
+### Secure Chat program provides end-to-end encrypted communication between users through a server. The application is built using Python and the Tkinter library for the graphical user interface. It uses a combination of asymmetric and symmetric encryption for secure communication. The program also provides user authentication and contact management features to user profiles.
 
 ## Libraries and Protocols
-~Original plan was to implement the Signal Open-Source Library however due to time constraints decided against (for now)
+~Original plan was to implement the Signal Open-Source Library however due to time constraints and installation issues decided against (for now).
 - Plan to implement in future along with OpenPGP tools!
-The following libraries are used in the program:
+# Usage: env/Scripts/activate or source env/bin/activate for Mac/Linux to activate virtual Environment with necessary dependencies. 
+# ~ `python server.py` - starts the server
+# ~ `python client.py` - Connects to server and initialized tkinter graphical user interface of Instant messaging!
 
+The following libraries are used in the program:
 - os, sys, and socket - For socket-based communication between the client and the server.
 - threading - For running` send and receive operations concurrently in separate threads.
 - sqlite3 - For storing user information and contacts in a local SQLite database.
