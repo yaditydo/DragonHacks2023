@@ -1,4 +1,4 @@
-# Encrypted Chat Program Documentation
+# Simple SecureChat /~~~\ Program Documentation
 # Overview
 # This encrypted chat program provides end-to-end encrypted communication between users through a server. The application is built using Python and the Tkinter library for the graphical user interface. It uses a combination of asymmetric and symmetric encryption for secure communication. The program also provides user authentication and contact management features.
 
